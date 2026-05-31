@@ -3,7 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { AuthContext } from "../context/AuthContext";
 import { Mail, Lock, Eye, EyeOff, LogIn } from "lucide-react";
-
+import API_URL from "../api";
 export default function Login() {
   const { login } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -22,7 +22,7 @@ export default function Login() {
 
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:5000/api/auth/login", {
+      const res = await fetch(`${API_URL}/api/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),

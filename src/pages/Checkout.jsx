@@ -3,6 +3,7 @@ import { CartContext } from "../context/CartContext";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
+import API_URL from "../api";
 import {
   MapPin, CreditCard, ShoppingBag,
   CheckCircle, ChevronDown, ChevronUp, Truck
@@ -99,7 +100,7 @@ const [address, setAddress] = useState(() => {
   try {
     // ── CASH ON DELIVERY ──
     if (paymentMethod === "Cash on Delivery") {
-      const res  = await fetch("http://localhost:5000/api/orders/place", {
+      const res  = await fetch(`${API_URL}/api/orders/place`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -127,7 +128,7 @@ const [address, setAddress] = useState(() => {
     // ── ONLINE PAYMENT (UPI / Card / Net Banking) ──
 
     // Step 1: Backend se Razorpay order banao
-    const orderRes  = await fetch("http://localhost:5000/api/payment/create-order", {
+    const orderRes  = await fetch(`${API_URL}/api/payment/create-order`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -154,7 +155,7 @@ const [address, setAddress] = useState(() => {
 
       handler: async (response) => {
         // Step 3: Payment verify karo
-        const verifyRes  = await fetch("http://localhost:5000/api/payment/verify", {
+        const verifyRes  = await fetch(`${API_URL}/api/payment/verify`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -166,7 +167,7 @@ const [address, setAddress] = useState(() => {
 
         if (verifyData.success) {
           // Step 4: Order place karo
-          const placeRes  = await fetch("http://localhost:5000/api/orders/place", {
+          const placeRes  = await fetch(`${API_URL}/api/orders/place`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",

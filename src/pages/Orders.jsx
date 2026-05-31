@@ -3,6 +3,7 @@ import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import Spinner from "../components/Spinner";
+import API_URL from "../api";
 import {
   Package, ShoppingBag, ChevronDown, ChevronUp,
   MapPin, CreditCard, Tag, X, CheckCircle,
@@ -47,7 +48,7 @@ export default function Orders() {
 
  const fetchOrders = async () => {
   try {
-    const res  = await fetch("http://localhost:5000/api/orders/my-orders", {
+    const res  = await fetch(`${API_URL}/api/orders/my-orders`, {
       headers: { Authorization: `Bearer ${token}` },
     });
 
@@ -76,7 +77,7 @@ export default function Orders() {
   const cancelOrder = async (orderId) => {
     setCancellingId(orderId);
     try {
-      const res = await fetch(`http://localhost:5000/api/orders/cancel/${orderId}`, {
+      const res = await fetch(`${API_URL}/api/orders/cancel/${orderId}`, {
         method: "PUT",
         headers: { Authorization: `Bearer ${token}` },
       });

@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import { motion, AnimatePresence } from "framer-motion";
+import API_URL from "../api";
 import {
   User, Mail, MapPin,
   Plus, Trash2, Check, ArrowLeft, Edit2,
@@ -67,7 +68,7 @@ export default function Profile() {
     }
     setProfileLoading(true);
     try {
-      const res = await fetch("http://localhost:5000/api/auth/update-profile", {
+      const res = await fetch(`${API_URL}/api/auth/update-profile`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

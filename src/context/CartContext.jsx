@@ -1,4 +1,5 @@
 import { createContext, useState, useEffect } from "react";
+import API_URL from "../api";
 
 export const CartContext = createContext();
 
@@ -87,7 +88,7 @@ const applyCoupon = async (code) => {
   try {
     const token = localStorage.getItem("token");
 
-    const res  = await fetch("http://localhost:5000/api/coupon/validate", {
+    const res  = await fetch(`${API_URL}/api/coupon/validate`,  {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

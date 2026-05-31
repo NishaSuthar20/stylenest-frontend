@@ -4,6 +4,7 @@ import { AuthContext } from "../context/AuthContext";
 import { products as localProducts } from "../data/products";
 import { motion, AnimatePresence } from "framer-motion";
 import Spinner from "../components/Spinner";
+import API_URL from "../api";
 import {
   LayoutDashboard, Package, ShoppingBag, Plus,
   Truck, CheckCircle, Clock, X, Edit2, Trash2,
@@ -75,7 +76,7 @@ export default function AdminPanel() {
 const fetchOrders = async () => {
   setLoading(true);
   try {
-    const res  = await fetch("http://localhost:5000/api/orders/all", {
+    const res  = await fetch(`${API_URL}/api/orders/all`, {
       headers: { Authorization: `Bearer ${token}` },
     });
 
@@ -114,7 +115,7 @@ const fetchOrders = async () => {
   // ── UPDATE ORDER STATUS ──
  const updateStatus = async (orderId, newStatus) => {
   try {
-    const res = await fetch(`http://localhost:5000/api/orders/status/${orderId}`, {
+    const res = await fetch(`${API_URL}/api/orders/status/${orderId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
